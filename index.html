@@ -80,11 +80,20 @@
     <button onclick="move('down')" style="grid-column: 2; padding: 15px; font-size: 1.5em; border: none; background-color: #2e8b57; color: white; border-radius: 10px;">⬇️</button>
   </div>
 
+  <!-- Botão de recomeçar -->
+  <button onclick="resetGame()" style="margin-top: 10px; padding: 10px 20px; font-size: 1em; border: none; background-color: #ff69b4; color: white; border-radius: 8px;">
+    🔄 Recomeçar
+  </button>
+
+  <!-- Áudio do beijo -->
+  <audio id="kiss-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_ef458e694b.mp3?filename=kiss-45648.mp3" preload="auto"></audio>
+
   <script>
     const frog1 = document.getElementById('frog1');
     const frog2 = document.getElementById('frog2');
     const message = document.getElementById('message');
     const gameArea = document.getElementById('game');
+    const kissSound = document.getElementById('kiss-sound');
 
     let x = 20;
     let y = 20;
@@ -116,11 +125,10 @@
         if (!kissed) {
           message.textContent = "Beijinhooo! 💋 Os sapinhos estão apaixonados!";
           showHearts();
+          kissSound.currentTime = 0;
+          kissSound.play();
           kissed = true;
         }
-      } else {
-        message.textContent = "";
-        kissed = false;
       }
     }
 
@@ -129,7 +137,7 @@
         const heart = document.createElement('div');
         heart.classList.add('heart');
 
-        const offsetX = Math.random() * 200 - 100; // -100 a +100
+        const offsetX = Math.random() * 200 - 100;
         const offsetY = Math.random() * 30 - 15;
 
         heart.style.left = (150 + offsetX) + 'px';
@@ -139,6 +147,18 @@
 
         setTimeout(() => heart.remove(), 1600);
       }
+    }
+
+    function resetGame() {
+      x = 20;
+      y = 20;
+      frog1.style.left = x + 'px';
+      frog1.style.top = y + 'px';
+      message.textContent = '';
+      kissed = false;
+
+      // Remove corações
+      document.querySelectorAll('.heart').forEach(h => h.remove());
     }
 
     // Suporte para teclado (PC)
