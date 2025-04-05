@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eu Amo Muito o Nícolas</title>
+  <style>
+    body {
+      background-color: #e0ffe0;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #2e8b57;
+      font-size: 3em;
+    }
+
+    p {
+      font-size: 1.5em;
+      color: #3c3c3c;
+      margin-top: 10px;
+    }
+
+    .frog-love {
+      margin-top: 30px;
+    }
+
+    img {
+      width: 250px;
+      border-radius: 15px;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Eu amo muito o Nícolas! 💚🐸</h1>
+  <p>Ele é a coisa mais linda da minha vida e juntos somos como sapinhos apaixonados!</p>
+
+  <div class="frog-love">
+    <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-83cc-51f7-b711-d392521b28f9/raw?se=2025-04-05T01%3A14%3A49Z&sp=r&sv=2024-08-04&sr=b&scid=0c6cdf9e-d5ec-593a-8627-40d63459d5f3&skoid=0abefe37-d2bd-4fcb-bc88-32bccbef6f7d&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-04T23%3A27%3A38Z&ske=2025-04-05T23%3A27%3A38Z&sks=b&skv=2024-08-04&sig=HgF32FpGN%2BRC4cy5aGKKLIsW4DJFrYtk8j0nci/WWEg%3D" alt="Casal de sapos fofinhos">
+  </div>
+</body>
+</html>
