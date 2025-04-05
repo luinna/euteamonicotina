@@ -4,11 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Eu Amo Muito o Nícolas</title>
+  <style>
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 1.5s ease-out forwards;
+      pointer-events: none;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.5) rotate(45deg);
+      }
+    }
+  </style>
 </head>
 <body style="background-color: #e0ffe0; font-family: Arial, sans-serif; text-align: center; padding: 20px;">
 
   <h1 style="color: #2e8b57; font-size: 2.5em;">Eu amo muito o Nícolas! 💚🐸</h1>
   <p style="font-size: 1.3em; color: #3c3c3c;">Ele é a coisa mais linda da minha vida e juntos somos como sapinhos apaixonados!</p>
+
+  <!-- Descrição do jogo -->
+  <p style="font-size: 1.1em; color: #2e8b57; max-width: 600px; margin: 0 auto 20px;">
+    💡 <strong>Como jogar:</strong> Use as setas do teclado (no computador) ou os botões abaixo (no celular) para mover o sapinho verdinho até o sapinho rosinha. Quando eles se encontrarem... vai rolar beijo com muitos coraçõezinhos! 💋💖
+  </p>
 
   <div style="margin: 20px;">
     <img 
@@ -37,9 +84,11 @@
     const frog1 = document.getElementById('frog1');
     const frog2 = document.getElementById('frog2');
     const message = document.getElementById('message');
+    const gameArea = document.getElementById('game');
 
     let x = 20;
     let y = 20;
+    let kissed = false;
 
     function move(direction) {
       const step = 20;
@@ -64,7 +113,31 @@
         r1.top < r2.bottom &&
         r1.bottom > r2.top
       ) {
-        message.textContent = "Beijinhooo! 💋 Os sapinhos estão apaixonados!";
+        if (!kissed) {
+          message.textContent = "Beijinhooo! 💋 Os sapinhos estão apaixonados!";
+          showHearts();
+          kissed = true;
+        }
+      } else {
+        message.textContent = "";
+        kissed = false;
+      }
+    }
+
+    function showHearts() {
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+
+        const offsetX = Math.random() * 200 - 100; // -100 a +100
+        const offsetY = Math.random() * 30 - 15;
+
+        heart.style.left = (150 + offsetX) + 'px';
+        heart.style.top = (150 + offsetY) + 'px';
+
+        gameArea.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1600);
       }
     }
 
