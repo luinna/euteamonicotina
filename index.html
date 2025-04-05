@@ -1,46 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Eu Amo Muito o Nícolas</title>
-  <style>
-    body {
-      background-color: #e0ffe0;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
-
-    h1 {
-      color: #2e8b57;
-      font-size: 3em;
-    }
-
-    p {
-      font-size: 1.5em;
-      color: #3c3c3c;
-      margin-top: 10px;
-    }
-
-    .frog-love {
-      margin-top: 30px;
-    }
-
-    img {
-      width: 250px;
-      border-radius: 15px;
-      margin: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-  </style>
 </head>
-<body>
-  <h1>Eu amo muito o Nícolas! 💚🐸</h1>
-  <p>Ele é a coisa mais linda da minha vida e juntos somos como sapinhos apaixonados!</p>
+<body style="background-color: #e0ffe0; font-family: Arial, sans-serif; text-align: center; padding: 20px;">
 
-  <div class="frog-love">
-     <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-83cc-51f7-b711-d392521b28f9/raw?se=2025-04-05T01%3A14%3A49Z&sp=r&sv=2024-08-04&sr=b&scid=0c6cdf9e-d5ec-593a-8627-40d63459d5f3&skoid=0abefe37-d2bd-4fcb-bc88-32bccbef6f7d&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-04T23%3A27%3A38Z&ske=2025-04-05T23%3A27%3A38Z&sks=b&skv=2024-08-04&sig=HgF32FpGN%2BRC4cy5aGKKLIsW4DJFrYtk8j0nci/WWEg%3D" alt="Casal de sapos fofinhos">
+  <h1 style="color: #2e8b57; font-size: 2.5em;">Eu amo muito o Nícolas! 💚🐸</h1>
+  <p style="font-size: 1.3em; color: #3c3c3c;">Ele é a coisa mais linda da minha vida e juntos somos como sapinhos apaixonados!</p>
+
+  <div style="margin: 20px;">
+    <img 
+      src="https://i.imgur.com/i3m1SjE.png" 
+      alt="Casal de sapos fofinhos"
+      style="width: 200px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+    />
   </div>
+
+  <div id="game" style="margin: 20px auto; width: 300px; height: 300px; background-color: #b0eacb; position: relative; border: 4px dashed #2e8b57; border-radius: 20px;">
+    <div id="frog1" style="width: 50px; height: 50px; background-image: url('https://i.imgur.com/skZVOPE.png'); background-size: cover; position: absolute; left: 20px; top: 20px;"></div>
+    <div id="frog2" style="width: 50px; height: 50px; background-image: url('https://i.imgur.com/0tcM1Uj.png'); background-size: cover; position: absolute; left: 200px; top: 200px;"></div>
+  </div>
+
+  <div id="message" style="font-size: 1.2em; color: #d63384; font-weight: bold; margin: 10px 0;"></div>
+
+  <!-- Controles para celular -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; max-width: 200px; margin: 20px auto;">
+    <button onclick="move('up')" style="grid-column: 2; padding: 15px; font-size: 1.5em; border: none; background-color: #2e8b57; color: white; border-radius: 10px;">⬆️</button>
+    <button onclick="move('left')" style="grid-column: 1; padding: 15px; font-size: 1.5em; border: none; background-color: #2e8b57; color: white; border-radius: 10px;">⬅️</button>
+    <button onclick="move('right')" style="grid-column: 3; padding: 15px; font-size: 1.5em; border: none; background-color: #2e8b57; color: white; border-radius: 10px;">➡️</button>
+    <button onclick="move('down')" style="grid-column: 2; padding: 15px; font-size: 1.5em; border: none; background-color: #2e8b57; color: white; border-radius: 10px;">⬇️</button>
+  </div>
+
+  <script>
+    const frog1 = document.getElementById('frog1');
+    const frog2 = document.getElementById('frog2');
+    const message = document.getElementById('message');
+
+    let x = 20;
+    let y = 20;
+
+    function move(direction) {
+      const step = 20;
+      if (direction === 'up') y = Math.max(0, y - step);
+      if (direction === 'down') y = Math.min(250, y + step);
+      if (direction === 'left') x = Math.max(0, x - step);
+      if (direction === 'right') x = Math.min(250, x + step);
+
+      frog1.style.left = x + 'px';
+      frog1.style.top = y + 'px';
+
+      checkCollision();
+    }
+
+    function checkCollision() {
+      const r1 = frog1.getBoundingClientRect();
+      const r2 = frog2.getBoundingClientRect();
+
+      if (
+        r1.left < r2.right &&
+        r1.right > r2.left &&
+        r1.top < r2.bottom &&
+        r1.bottom > r2.top
+      ) {
+        message.textContent = "Beijinhooo! 💋 Os sapinhos estão apaixonados!";
+      }
+    }
+
+    // Suporte para teclado (PC)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') move('up');
+      if (e.key === 'ArrowDown') move('down');
+      if (e.key === 'ArrowLeft') move('left');
+      if (e.key === 'ArrowRight') move('right');
+    });
+  </script>
 </body>
 </html>
